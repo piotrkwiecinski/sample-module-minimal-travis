@@ -30,5 +30,5 @@ before_install:
   - cp vendor/$TRAVIS_REPO_SLUG/phpunit.travis.xml dev/tests/unit/phpunit.xml
 script:
   - echo $PWD
-  - cd magento
+  - ls vendor
   - vendor/bin/phpunit -c dev/tests/unit/phpunit.xml
