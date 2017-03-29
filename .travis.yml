@@ -11,13 +11,21 @@ language: php
 php:
   - 7.0
 env:
+    - MAGENTO_CE_VERSION=2.1.5
   global:
     - COMPOSER_BIN_DIR=~/bin
  cache:
    apt: true
    directories: $HOME/.composer/cache
-before_script:
+before_install:
   # disable xdebug for perf
   - phpenv config-rm xdebug.ini
   # Get latest version of composer
   - composer selfupdate
+  # Clone main magento github repository
+  - git clone https://github.com/magento/magento2 --branch $MAGENTO_CE_VERSION --depth 1
+  - cd magento2
+  - composer require $TRAVIS_REPO_SLUG dev-$TRAVIS_PULL_REQUEST_BRANCH
+  - cp vendor/$TRAVIS_REPO_SLUG/phpunit.travis.xml dev/tests/unit/phpunit.xml
+before_script: ./dev/travis/before_script.sh
+script: vendor/bin/phpunit -c dev/tests/unit/phpunit.xml
