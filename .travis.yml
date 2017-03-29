@@ -28,5 +28,7 @@ before_install:
   - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
   - composer require $TRAVIS_REPO_SLUG dev-$BRANCH
   - cp vendor/$TRAVIS_REPO_SLUG/phpunit.travis.xml dev/tests/unit/phpunit.xml
-before_script: ./dev/travis/before_script.sh
-script: vendor/bin/phpunit -c dev/tests/unit/phpunit.xml
+script:
+  - echo $PWD
+  - cd magento
+  - vendor/bin/phpunit -c dev/tests/unit/phpunit.xml
