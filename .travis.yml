@@ -11,7 +11,7 @@ language: php
 php:
   - 7.0
 env:
-    - MAGENTO_CE_VERSION=2.1.5
+  - MAGENTO_CE_VERSION=2.1.5
   global:
     - COMPOSER_BIN_DIR=~/bin
  cache:
