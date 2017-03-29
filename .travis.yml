@@ -14,9 +14,9 @@ env:
   global:
     - MAGENTO_CE_VERSION=2.1.5
     - COMPOSER_BIN_DIR=~/bin
- cache:
-   apt: true
-   directories: $HOME/.composer/cache
+cache:
+  apt: true
+  directories: $HOME/.composer/cache
 before_install:
   # disable xdebug for perf
   - phpenv config-rm xdebug.ini
