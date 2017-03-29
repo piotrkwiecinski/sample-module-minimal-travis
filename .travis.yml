@@ -25,7 +25,7 @@ before_install:
   # Clone main magento github repository
   - git clone https://github.com/magento/magento2 --branch $MAGENTO_CE_VERSION --depth 1
   - cd magento2
-  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then export BRANCH=$TRAVIS_PULL_REQUEST_BRANC else BRANCH=$TRAVIS_BRANCH; fi'
+  - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
   - composer require $TRAVIS_REPO_SLUG dev-$BRANCH
   - cp vendor/$TRAVIS_REPO_SLUG/phpunit.travis.xml dev/tests/unit/phpunit.xml
 before_script: ./dev/travis/before_script.sh
